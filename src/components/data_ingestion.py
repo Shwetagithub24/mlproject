@@ -10,6 +10,10 @@ from sklearn.model_selection import train_test_split
 
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
+
 @dataclass
 class DataIngestionConfig:
     train_data_path : str=os.path.join('artifacts','train.csv')   # all the outputs will be saved in artifacts folder
@@ -53,4 +57,8 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()  # Properly create an instance of the DataIngestion class
-    DataIngestion.initiate_data_ingestion(obj)  # Call the method using the instance
+    train_data,test_data=obj.initiate_data_ingestion()  # Call the method using the instance
+
+
+data_transformation=DataTransformation()
+data_transformation.initiate_data_transformation(train_data,test_data)
